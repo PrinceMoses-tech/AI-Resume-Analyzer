@@ -30,7 +30,9 @@ public class ResumeReportService {
 
         try{
             ApiResponse response=restTemplate.postForObject(url,prompt,ApiResponse.class);
+
             assert response != null;
+
             return resumeUtil.extractObj(response.getResponse());
 
         }

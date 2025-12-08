@@ -41,6 +41,9 @@ public class ResumeReportController {
         return ResponseEntity.badRequest().body(Map.of("error",validate));
         }
         ResumeReport report=pdfExtractService.extractText(file,description);
+        if(report==null){
+            return ResponseEntity.badRequest().body(Map.of("response","Unable to generate your resume report"));
+        }
         report.setEmail(email);
         repo.save(report);
         return ResponseEntity.ok(Map.of("response","Report generated successfully"));
