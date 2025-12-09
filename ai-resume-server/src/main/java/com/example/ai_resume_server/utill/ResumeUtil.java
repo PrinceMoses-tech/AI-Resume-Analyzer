@@ -52,9 +52,6 @@ public class ResumeUtil {
         response.setMissingKeywords(List.of(m.group(6).trim().split(",")));
         response.setSummary(m.group(7).trim());
 
-
-
-        repo.save(response);
         return response;
     }
 

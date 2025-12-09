@@ -102,7 +102,7 @@ public class ResumeReportController {
                     ));
         }
 
-        Optional<List<ResumeReport>> reports = resumeService.getReport(email);
+        Optional<List<ResumeReport>> reports = Optional.ofNullable(resumeService.getReport(email));
 
         if (reports.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
@@ -119,5 +119,16 @@ public class ResumeReportController {
                         "reports", reports
                 )
         );
+    }
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteReport(@PathVariable Long id){
+        if(!reportRepo.existsById(id)){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("status",false,"message","No report exists with this id"));
+        }
+        boolean delete=resumeService.delete(id);
+        if(!delete){
+            return ResponseEntity.badRequest().body("");
+        }
+        return ResponseEntity.ok().body(Map.of("status",true,"message","Report deleted successfully"));
     }
 }
