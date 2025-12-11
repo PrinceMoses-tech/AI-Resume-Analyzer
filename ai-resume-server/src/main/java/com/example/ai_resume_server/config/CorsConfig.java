@@ -12,7 +12,8 @@ public class CorsConfig implements WebMvcConfigurer {
                 .allowedMethods("GET","POST","PUT","DELETE")
                 .allowedOrigins("http://localhost:5173",
                         "http://localhost:63342/Ai-Resume-Analyzer/ai-resume-server/static/index.html?_ijt=fca4s748v865209lfmb70rhs6v&_ij_reload=RELOAD_ON_SAVE",
-                        "http://localhost:3000"
+                        "http://localhost:3000",
+                        "https://ai-resume-analyzer-teal-three.vercel.app/"
                         )
                 .allowedHeaders("*");
     }
