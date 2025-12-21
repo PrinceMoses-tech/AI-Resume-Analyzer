@@ -41,6 +41,7 @@ public class ResumeReportService {
     /**
      * Sends prompt to ML API and extracts ResumeReport.
      */
+
     public ResumeReport sendPrompt(Message prompt) {
 
         try {

@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { getReports, deleteReport } from "../api/api";
 
+function titleCase(str) {
+  if (!str) return "";
+  return str
+    .toLowerCase()
+    .replace(/\b\w/g, (char) => char.toUpperCase());
+}
+
 export default function Reports() {
   const email = localStorage.getItem("email");
   const [reports, setReports] = useState([]);
@@ -77,21 +84,26 @@ export default function Reports() {
       ) : !error && reports.length > 0 ? (
         <div className="report-grid">
           {reports.map((r) => (
-            <article className="report-card" key={r.id}>
+            <article className="report-card styled" key={r.id}>
+              
+              {/* HEADER */}
               <div className="report-meta">
-                <span className="pill">🎯 Target Role</span>
+                <span className="pill" style={{ background: "rgba(139,92,246,0.12)", borderColor: "rgba(139,92,246,0.35)", color: "#c4b5fd" }}>
+                  Target role
+                </span>
                 <button className="btn btn-secondary" onClick={() => remove(r.id)}>
                   🗑️ Delete
                 </button>
               </div>
-              <div className="input-group">
-                <label className="input-label">Description</label>
-                <div className="report-text">{r.description || "No description provided"}</div>
+              <div>
+                <p className="muted" style={{ margin: "0 0 6px 0" }}>Description</p>
+                <div className="report-text">{r.description}</div>
               </div>
-              <div className="input-group">
-                <label className="input-label">AI Analysis Report</label>
-                <div className="report-text">{r.generatedText || "No report generated yet."}</div>
+              <div>
+                <p className="muted" style={{ margin: "0 0 6px 0" }}>Report</p>
+                <div className="report-text">{r.generatedText}</div>
               </div>
+
             </article>
           ))}
         </div>
