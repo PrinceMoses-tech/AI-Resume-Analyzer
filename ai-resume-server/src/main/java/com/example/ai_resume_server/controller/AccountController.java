@@ -39,7 +39,7 @@ public class AccountController {
         }
         return ResponseEntity.ok().body(Map.of("status",true,"message","Login successfully"));
     }
-    @GetMapping("/read")
+    @GetMapping("/details")
     public ResponseEntity<?> getUser(@RequestParam("email") String email){
         try{
             if(!repo.existsByEmail(email)){
